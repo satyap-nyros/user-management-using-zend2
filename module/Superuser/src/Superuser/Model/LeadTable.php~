@@ -1,0 +1,71 @@
+<?php
+namespace Agent\Model;
+
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Where;
+
+class LeadTable
+{
+    protected $tableGateway;
+
+    protected $adapter;
+
+    public function __construct(TableGateway $tableGateway)
+    {
+        $this->tableGateway = $tableGateway;
+    }
+
+    public function fetchAll()
+    {
+        $resultSet = $this->tableGateway->select();
+        return $resultSet;
+    }
+
+    public function saveLead(Lead $lead)
+    {
+	$id = $_SESSION['agentid'];
+	$initStatus = 'Submitted';
+        $data = array(
+            'agent_id' => $id,
+            'fname' => $lead->fname,
+            'lname' => $lead->lname,
+            'address' => $lead->address,
+	    'phone' => $lead->phone,
+            'state' => $lead->state,
+            'email'  => $lead->email,
+	    'status'  => $initStatus,
+        );
+
+        $id = (int)$lead->id;
+        if ($id == 0) {
+            $this->tableGateway->insert($data);
+        } else {
+            if ($this->getLead($id)) {
+                $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('Lead id does not exist');
+            }
+        }
+    }
+
+    public function deleteLead($id)
+    {
+        $this->tableGateway->delete(array('id' => $id));        
+    }
+
+    public function Agentleads($id)
+    {
+
+	/*$where = new Where();    
+	$where->Equal To(agent_id, $id);
+	$resultset = $this->tableGateway->select($where);
+	
+	print_r($resultset);
+
+	exit;
+	return $resultSet;	*/
+    }
+	    
+}
+
+

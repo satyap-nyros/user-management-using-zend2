@@ -1,0 +1,122 @@
+<?php
+/**
+ * Zend Framework (http://framework.zend.com/)
+ *
+ * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
+ * @copyright Copyright (c) 2005-2013 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
+namespace Application\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Application\Form\LoginForm;
+use Application\Form\RegisterForm;
+use Zend\Session\Container;
+use Application\Model\Login;
+use Application\Model\Register;
+use Application\Model\UsersTable;
+use Zend\Db\Sql;
+
+class IndexController extends AbstractActionController
+{
+
+    protected  $usersTable;
+    public function indexAction()
+    {  
+    	//$config = $this->getServiceLocator()->get('config');
+   	//print_r($config	);exit;
+    	$form = new LoginForm();
+        $request = $this->getRequest();      
+       	if ($request->isPost()) 
+       	{
+            $login = new Login();
+            $form->setInputFilter($login->getInputFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) 
+            {
+                $login->exchangeArray($form->getData());
+                $arrData = $form->getData();
+                $username = $arrData['user_name'];
+                $password = $arrData['password'];
+                
+              	$existed_row = $this->getUsersTable()->getUserData($username,$password);
+              	try
+              	{
+              		if(isset($existed_row['id']))
+              		{
+              			$user_session = new Container('user');
+				$user_session->user_id = $existed_row['id'];				
+              			return $this->redirect()->toRoute('admin');
+              		}
+              		else
+              		{
+              			$this->flashMessenger()->addErrorMessage('Invalid Username/Password!');
+                        	return $this->redirect()->toRoute('home', array('action' => 'index'));
+              		}
+              	}
+              	catch(Exception $e)
+              	{
+              	
+              	}          
+            }
+	    else {
+              // $this->flashMessenger()->addErrorMessage('Please fill valid credentials');
+              // return $this->redirect()->toRoute('home', array('action' => 'index'));
+            }
+          }
+           return new ViewModel(array(
+            'form' => $form,
+            'scc'  => $this->flashMessenger()->getCurrentSuccessMessages(),
+            'err'  => $this->flashMessenger()->getCurrentErrorMessages(),
+        )); 
+    }
+    public function registerAction()
+    {
+    	$form = new RegisterForm();
+        $request = $this->getRequest();
+        if ($request->isPost()) 
+       	{
+       	     
+       	    if(isset($_POST['cancel'])&&$_POST['cancel'] == 'Cancel')
+	    {
+			return $this->redirect()->toRoute('Start', array('action' => 'index'));
+	    }
+	    
+            $register = new Register();
+            $form->setInputFilter($register->getInputFilter());
+            $form->setData($request->getPost());
+            if ($form->isValid()) 
+            {	
+            	$register = new Register();
+            	
+            	$register->exchangeArray($form->getData());
+print_r($register);exit;
+            	$arrData = $form->getData();
+            	print_r($arrData);exit;
+           
+            }
+            else
+            {
+            	$this->flashMessenger()->addErrorMessage('Invalid Details!');
+            }
+        }
+        return new ViewModel(array(
+            'form' => $form,
+            'scc'  => $this->flashMessenger()->getCurrentSuccessMessages(),
+            'err'  => $this->flashMessenger()->getCurrentErrorMessages(),
+        ));     
+    }
+
+    public function getUsersTable()
+    {
+        if (!$this->usersTable) {
+            $sm = $this->getServiceLocator();
+            $this->usersTable = $sm->get('Application\Model\UsersTable');
+            
+        }
+        return $this->usersTable;
+    }   
+   
+}

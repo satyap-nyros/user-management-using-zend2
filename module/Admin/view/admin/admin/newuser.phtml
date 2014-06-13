@@ -1,0 +1,135 @@
+
+
+
+<?php
+// module/Album/view/album/album/edit.phtml:
+
+$title = 'Registration Form';
+$this->headTitle($title);
+?>
+<div class="inner-coner">
+<h3 ><?php echo $this->escapeHtml($title); ?></h3>
+
+
+ 
+    <div class="container-fluid" >
+        <div class="row-fluid">
+            <div class="span10">
+            	<?php if(!empty($this->scc)): ?>
+                <div class="span10">
+                    <ul>
+                    <?php foreach ($this->scc as $v): ?>
+                        <li><?php echo $v; ?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            <?php if(!empty($this->err)): ?>
+                <div class="span10">
+                    <ul>
+                    <?php foreach ($this->err as $v): ?>
+                        <li><?php echo $v; ?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+                <?php
+                $form = $this->form;               
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+           
+                
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('first_name')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('first_name')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('first_name')); ?>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('last_name')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('last_name')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('last_name')); ?>
+                </div>
+		<div class="control-group">
+                    <?php  echo $this->formLabel($form->get('user_name')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('user_name')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('user_name')); ?>
+                </div>
+                <div class="control-group">
+                    <?php  echo $this->formLabel($form->get('password')); ?>
+                    <div class="controls">
+                        <?php echo $this->formPassword($form->get('password')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('password')); ?>
+                </div>
+
+
+		 <div class="control-group">
+                    <?php echo $this->formLabel($form->get('company')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('company')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('company')); ?>
+                </div>
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('skills')); ?>
+                    <div class="controls">
+                        <?php echo $this->formTextarea($form->get('skills')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('skills')); ?>
+                </div>
+                 <div class="control-group">
+                    <?php echo $this->formLabel($form->get('qulification')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('qulification')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('qulification')); ?>
+                </div>
+                 <div class="control-group">
+                    <?php echo $this->formLabel($form->get('mobile')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('mobile')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('mobile')); ?>
+                </div>
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('role')); ?>
+                    <div class="controls">
+                        <?php echo $this->formSelect($form->get('role')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('role')); ?>
+                </div>
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('profile_pic')); ?>
+                    <div class="controls">
+                        <?php echo $this->formFile($form->get('profile_pic')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('profile_pic')); ?>
+                </div>
+
+
+
+		<div class="control-group">
+		 <div class="controls">
+                    <?php
+                    	echo $this->formSubmit($form->get('submit')). ' ';
+                        echo $this->formSubmit($form->get('cancel'));
+                        
+                    ?>
+                  </div>
+                </div>
+                <?php
+                echo $this->form()->closeTag($form);
+                ?>
+            </div>
+        </div>
+    </div>
+   </div>
+  <div>

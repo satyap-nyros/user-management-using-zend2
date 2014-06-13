@@ -1,0 +1,59 @@
+<?php
+namespace Application\Model;
+
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Sql;
+//use Zend\Db\Sql\Where;
+//use Zend\Db\Sql\Select;
+//use Zend\Text;
+class UsersTable
+{
+    protected $tableGateway;
+
+    public function __construct(TableGateway $tableGateway)
+    {
+        $this->tableGateway = $tableGateway;
+    }
+
+    /*public function fetchAll()
+    {
+        $resultSet = $this->tableGateway->select();
+        return $resultSet;
+    }    
+
+    public function fetchMails($currmail,$id)
+    {
+	$where = new Where();    
+	//$where->like('optionalcontacts',"$currmail%");
+        $where->like('receipentids',"$id%");
+        $where->or;
+        $where->like('optionalcontacts',"$currmail%");
+	$resultset = $this->tableGateway->select($where);
+	
+//	print_r($resultset);exit;
+
+	return $resultset;	
+
+    }
+
+    public function saveMail(Mails $mail)
+    {
+        $data = array(
+            'content' => $mail->content,
+            'subject' => $mail->subject,
+            'date_sent' => $mail->date_sent,
+            'receipentids' => $mail->receipentids,
+            'optionalcontacts'=> $mail->optionalcontacts,
+            'admin_id' => $mail->admin_id,
+            'agent_id' => $mail->agent_id,
+        );
+
+        $this->tableGateway->insert($data);        
+    }*/
+    public function getUserData($username)
+    {
+    	
+    }
+}
+
+

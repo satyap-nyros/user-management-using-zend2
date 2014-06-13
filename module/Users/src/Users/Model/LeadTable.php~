@@ -1,0 +1,101 @@
+<?php
+namespace Admin\Model;
+
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Sql\Where;
+use Zend\Db\Sql\Select;
+use Zend\Text;
+class LeadTable
+{
+    protected $tableGateway;
+
+    public function __construct(TableGateway $tableGateway)
+    {
+        $this->tableGateway = $tableGateway;
+    }
+
+    public function fetchAll()
+    {
+        $resultSet = $this->tableGateway->select();
+        return $resultSet;
+    }    
+
+    public function getLead($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('id' => $id));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
+    }
+
+    public function saveLead(Lead $lead)
+    {  
+        $id = (int)$lead->id;
+        $today = date("Y-m-d H:i:s");
+        if ($id == 0) 
+        {
+	    $data = array(
+            'fname' => $lead->fname,
+            'lname' => $lead->lname,
+            'address' => $lead->address,
+	    'phone' => $lead->phone,
+            'state' => $lead->state,
+            'email'  => $lead->email,
+	    'status'  => $lead->status,
+	    'date_created' => $today,
+        );
+            $this->tableGateway->insert($data);
+        } 
+        else {
+            if ($this->getLead($id)) 
+            {
+		$data = array(
+		    'fname' => $lead->fname,
+		    'lname' => $lead->lname,
+		    'address' => $lead->address,
+		    'phone' => $lead->phone,
+		    'state' => $lead->state,
+		    'email'  => $lead->email,
+		    'status'  => $lead->status,
+                    'date_updated' => $today,
+		);
+                $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('Lead id does not exist');
+            }
+        }
+    }
+
+    public function deleteLead($id)
+    {
+        $this->tableGateway->delete(array('id' => $id));        
+    }
+
+    public function allLeads()
+    {
+	/*
+        $sqlSelect = $this->tableGateway->getSql()
+                          ->select()->columns(array('fname', 'lname', 'email','address','status'))
+                          ->join('Agent', 'Agent.id = Leads.agent_id', array('name','email'), 'left');
+       
+        return $this->tableGateway->select($sqlSelect); 
+        */
+   }
+
+    public function Agentleads($id)
+    {
+	$where = new Where();    
+	$where->equalTo('agent_id',$id);
+	$resultset = $this->tableGateway->select($where);
+	
+	//print_r($resultset);
+
+	return $resultset;	
+    }
+}
+
+

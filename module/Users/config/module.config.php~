@@ -1,0 +1,159 @@
+<?php
+return array(
+    'controllers' => array(
+        'invokables' => array(
+            'Admin\Controller\Admin' => 'Admin\Controller\AdminController',            
+        ),
+    ),
+
+
+    'router' => array(
+        'routes' => array(
+
+            'admin' => array(
+                'type'    => 'segment',
+                'options' => array(
+                    'route'    => '/admin[/][:action][/:id]',
+                    'constraints' => array(
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ),
+                    'defaults' => array(
+                        'controller' => 'Admin\Controller\Admin',
+                        'action'     => 'agent',
+                    ),
+                ),
+            ),
+
+	
+
+	'admin-login' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/login[/:action][/:key]',
+					'constraints' => array(
+						'action'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'key'     => '[a-zA-Z0-9_-]*',
+					),
+					'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Admin',
+                        'action'        => 'login',
+                    ),
+				),
+			),
+
+
+	'loginagent' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => 'loginagent[/:action][/:key]',
+					'constraints' => array(
+						'action'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'key'     => '[a-zA-Z0-9_-]*',
+					),
+					'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Admin',
+                        'action'        => 'loginagent',
+                    ),
+				),
+			),
+
+
+	'loginsuperadmin' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/loginsuperadmin[/:action][/:key]',
+					'constraints' => array(
+						'action'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'key'     => '[a-zA-Z0-9_-]*',
+					),
+					'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Admin',
+                        'action'        => 'loginsuperadmin',
+                    ),
+				),
+			),
+
+
+	'agent' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/agent[/:action][/:key]',
+					'constraints' => array(
+						'action'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'key'     => '[a-zA-Z0-9_-]*',
+					),
+					'defaults' => array(
+                        '__NAMESPACE__' => 'Admin\Controller',
+                        'controller'    => 'Admin',
+                        'action'        => 'agent',
+                    ),
+				),
+			),
+
+
+          'Agent' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/agent[/:action][/:key]',
+					'constraints' => array(
+						'action'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'key'     => '[a-zA-Z0-9_-]*',
+					),
+					'defaults' => array(
+                        '__NAMESPACE__' => 'Agent\Controller',
+                        'controller'    => 'Agent',
+                        'action'        => 'index',                 //home  index
+                    ),
+				),
+			),
+
+
+          'Superadmin' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/superadmin[/:action][/:key]',
+					'constraints' => array(
+						'action'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'key'     => '[a-zA-Z0-9_-]*',
+					),
+					'defaults' => array(
+                        '__NAMESPACE__' => 'Superadmin\Controller',
+                        'controller'    => 'Superadmin',
+                        'action'        => 'index',
+                    ),
+				),
+			),
+
+          'superadmin' => array(
+				'type'    => 'segment',
+				'options' => array(
+					'route'    => '/superadmin[/:action][/:key]',
+					'constraints' => array(
+						'action'  => '[a-zA-Z][a-zA-Z0-9_-]*',
+						'key'     => '[a-zA-Z0-9_-]*',
+					),
+					'defaults' => array(
+                        '__NAMESPACE__' => 'Superadmin\Controller',
+                        'controller'    => 'Superadmin',
+                        'action'        => 'editagent',
+                    ),
+				),
+			),
+ 
+
+        ),
+    ),
+
+
+  
+    'view_manager' => array(
+	 	
+        'template_path_stack' => array(
+            'admin' => __DIR__ . '/../view',
+        ),
+    ),
+);

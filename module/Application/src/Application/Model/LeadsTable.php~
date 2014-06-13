@@ -1,0 +1,99 @@
+<?php
+namespace Agent\Model;
+
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql\Where;
+
+class LeadsTable
+{
+    protected $tableGateway;
+
+    protected $adapter;
+
+    public function __construct(TableGateway $tableGateway)
+    {
+        $this->tableGateway = $tableGateway;
+    }
+
+    public function fetchAll()
+    {
+        $resultSet = $this->tableGateway->select();
+        return $resultSet;
+    }
+
+    public function saveLead(Leads $lead)
+    {
+        $today = date("Y-m-d H:i:s");
+	$ids = $_SESSION['agentid'];
+	$agentname = $_SESSION['agentname'];
+	$agentmail = $_SESSION['agentmail'];
+        
+
+        $id = (int)$lead->id;
+        if ($id == 0) {
+            $data = array(
+            'agent_id' => $ids,
+            'agentname' => $agentname,
+            'agentmail' => $agentmail,
+            'fname' => $lead->fname,
+            'lname' => $lead->lname,
+            'address' => $lead->address,
+	    'phone' => $lead->phone,
+            'state' => $lead->state,
+            'status' => 'Submitted',
+            'email'  => $lead->email,
+            'date_created' => $today,
+        );
+            $this->tableGateway->insert($data);
+        } else {
+            if ($this->getLead($id)) {
+                $data = array(
+            'agent_id' => $ids,
+            'agentname' => $agentname,
+            'agentmail' => $agentmail,
+            'fname' => $lead->fname,
+            'lname' => $lead->lname,
+            'address' => $lead->address,
+	    'phone' => $lead->phone,
+            'state' => $lead->state,
+            'email'  => $lead->email,
+            'date_updated' => $today,
+        );
+                $this->tableGateway->update($data, array('id' => $id));
+            } else {
+                throw new \Exception('Lead id does not exist');
+            }
+        }
+    }
+
+    public function getLead($id)
+    {
+        $id  = (int) $id;
+        $rowset = $this->tableGateway->select(array('id' => $id));
+        $row = $rowset->current();
+        if (!$row) {
+            throw new \Exception("Could not find row $id");
+        }
+        return $row;
+    }
+
+
+    public function deleteLead($id)
+    {
+        $this->tableGateway->delete(array('id' => $id));        
+    }
+
+    public function Agentleads($id)
+    {
+	$where = new Where();    
+	$where->equalTo('agent_id',$id);
+	$resultset = $this->tableGateway->select($where);
+	
+	//print_r($resultset);
+
+	return $resultset;	
+    }
+	    
+}
+
+

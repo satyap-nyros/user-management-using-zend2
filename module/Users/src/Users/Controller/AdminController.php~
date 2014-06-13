@@ -1,0 +1,108 @@
+<?php
+namespace Admin\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+use Admin\Model\Users;
+use Admin\Model\UsersTable;
+use Admin\Form\EditForm;
+use Zend\Session\Container;
+/*use Admin\Model\Admin;
+use Admin\Model\AdminTable;
+use Admin\Model\Agent;
+use Admin\Model\AgentTable;
+use Admin\Model\GetAgentTable;
+use Admin\Model\Lead;
+use Admin\Model\LeadTable;
+
+use Admin\Form\AgentForm;
+use Admin\Form\LoginForm;
+use Admin\Form\LoginAgentForm;
+use Admin\Form\LoginSuperadminForm;
+use Admin\Form\LeadForm;
+use Admin\Model\Login;
+use Admin\Form\emailForm;
+use Admin\Form\AgentRegisterForm;
+use Admin\Form\RegisterForm;
+use Admin\Model\Signup;
+use Admin\Model\SignupTable;
+use Admin\Model\Signin;
+use Admin\Model\SigninTable;
+use Admin\Model\Mails;
+use Admin\Model\MailTable;
+
+use Zend\Mail\Transport\Sendmail as SendmailTransport;
+use Zend\Mail;
+use Zend\Mime\Message as MimeMessage;
+use Zend\Mime\Part as MimePart;
+use Zend\Db\Sql;
+ */
+class AdminController extends AbstractActionController
+{
+   
+    protected  $usersTable;
+    
+    public function indexAction()
+    {
+    	$user_session = new Container('user');
+    	$this_user = (array)$this->getUsersTable()->getUser($user_session->user_id);
+        return new ViewModel(array(
+           'details' => $this_user,
+        ));
+    
+             
+    }
+    public function editAction()
+    {
+    	$user_session = new Container('user');
+    	$id = (int) $this->params()->fromRoute('id', $user_session->user_id);
+    	try {
+            $this_user = $this->getUsersTable()->getUser($id);
+           
+        }
+        catch (\Exception $ex) {
+            return $this->redirect()->toRoute('admin', array(
+                'action' => 'index'
+            ));
+        } 
+        
+    	$request = $this->getRequest();
+    	$form = new EditForm();
+    	$form->bind($this_user);
+    	if ($request->isPost()) 
+    	{
+    	    if($_POST['cancel'] == 'Cancel')
+	    {
+			return $this->redirect()->toRoute('admin', array('action' => 'index'));
+	    }
+	    $users = new Users();
+            $form->setInputFilter($users->getInputFilter());
+            $form->setData($request->getPost());
+             if ($form->isValid()) 
+            {
+		echo $this_user->first_name;exit;
+            //$users->exchangeArray($form->getData());
+           // $arrData = $form->getData();
+            print_r($arrData['id']);exit;
+            }
+            else{
+            echo "asdf";exit;}
+    	 }
+    	 return new ViewModel(array(
+            'form' => $form,
+            'scc'  => $this->flashMessenger()->getCurrentSuccessMessages(),
+            'err'  => $this->flashMessenger()->getCurrentErrorMessages(),
+        ));    
+    }
+    public function getUsersTable()
+    {
+        if (!$this->usersTable) {
+            $sm = $this->getServiceLocator();
+            $this->usersTable = $sm->get('Admin\Model\UsersTable');
+            
+        }
+        return $this->usersTable;
+    }   
+
+
+}

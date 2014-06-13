@@ -1,0 +1,160 @@
+<?php
+if(!isset($_SESSION['Aid']))
+{
+header('Location:/login');
+exit;}
+else
+{
+header('Location:/admin');
+}
+
+?>
+
+
+<?php
+
+$title = 'Edit Lead';
+$this->headTitle($title);
+?>
+    <header>
+      <!-- Start: Navigation wrapper -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a href="/" class="brand brand-bootbus"><img src="../../img/logo.png" alt="Agent Coach" title="Agent Coach"></a>
+            <!-- Below button used for responsive navigation -->
+            <button type="button" class="btn btn-navbar" data-togentggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- Start: Primary navigation -->
+            <div class="nav-collapse collapse">        
+              <ul class="nav pull-right">
+<!--                <li><a href="<?php echo $this->url('admin', array('action'=>'index')); ?>">Administrators</a></li>  -->
+		<li><a href="<?php echo $this->url('admin', array('action'=>'agent')); ?>">Agents</a></li>
+		<li><a href="<?php echo $this->url('admin', array('action'=>'email')); ?>">Newsletters</a></li>
+                <li><a href="<?php echo $this->url('admin', array('action'=>'logout')); ?>">logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End: Navigation wrapper -->   
+    </header>
+
+<br>
+
+<h1>Leads</h1>
+<h3 style="margin-left:20px;"><?php echo $this->escapeHtml($title); ?></h3>
+ 
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url(
+    'admin',
+    array(
+        'action' => 'editlead',
+        'id'     => $this->id,
+    )
+));
+?>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span10">
+                <?php
+                $form = $this->form;
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+                <div class="control-group">
+			<?php echo $this->formHidden($form->get('id')); ?>
+                </div>
+                
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('fname')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('fname')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('fname')); ?>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('lname')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('lname')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('lname')); ?>
+                </div>
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('agentname')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('agentname')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('agentname')); ?>
+                </div>
+
+		<div class="control-group">
+                    <?php echo $this->formLabel($form->get('agentmail')); ?>
+                    <div class="controls">
+                        <?php echo $this->formEmail($form->get('agentmail')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('agentmail')); ?>
+                </div>
+
+
+		<div class="control-group">
+                    <?php echo $this->formLabel($form->get('email')); ?>
+                    <div class="controls">
+                        <?php echo $this->formEmail($form->get('email')); ?>
+                    </div><br><br>
+                    <?php echo $this->formElementErrors($form->get('email')); ?>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('phone')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('phone')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('phone')); ?>
+                </div>
+
+		<div class="control-group">
+                    <?php echo $this->formLabel($form->get('address')); ?>
+                    <div class="controls">
+                        <?php echo $this->formTextarea($form->get('address')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('address')); ?>
+                </div>
+
+
+		<div class="control-group">
+                    <?php echo $this->formLabel($form->get('state')); ?>
+                    <div class="controls">
+                        <?php echo $this->formSelect($form->get('state')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('state')); ?>
+                </div>
+		
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('status')); ?>
+                    <div class="controls">
+                        <?php echo $this->formSelect($form->get('status')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('status')); ?>
+                </div>
+               
+                <div class="form-actions">
+                    <?php
+                        echo $this->formSubmit($form->get('cancel')) . ' ';
+                        echo $this->formSubmit($form->get('submit'));
+                    ?>
+                </div>
+                <?php
+                echo $this->form()->closeTag($form);
+                ?>
+            </div>
+        </div>
+    </div>
+    </div>
+
+

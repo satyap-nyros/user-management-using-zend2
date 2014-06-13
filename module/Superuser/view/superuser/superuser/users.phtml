@@ -1,0 +1,90 @@
+
+<div class="container-color">
+     <div class='page'></div>
+     
+     	<!--<a href="#/new" class='btn btn-primary'>New user</a>-->
+     	<!--<input id='names' type='text'/>
+     	<div class='filters'>
+<div class='filter-container'>
+<input autocomplete='off' id='fname' class='filter' name='FirstName' placeholder='name' />
+</div>
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='LastName' placeholder='drink' />
+</div>
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='Mobile' placeholder='pizza' />
+</div>
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='username' placeholder='movie' />
+</div>
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='Qualification' placeholder='movie' />
+</div>
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='Skills' placeholder='movie' />
+</div>
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='Company' placeholder='movie' />
+</div>
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='Role' placeholder='movie' />
+</div>
+<div class='clearfix'></div>
+</div>-->
+	
+	<script id="movie-table" type="text/template">
+	
+<thead>
+     		
+     		<tr>
+     		  <td><input autocomplete='off' id='fname' class='filter' name='FirstName' /></td>
+     		 <td> <input autocomplete='off' id='lname' class='filter' name='LastName'  /></td>
+		  <td> <input autocomplete='off' id='mob' class='filter' name='Mobile' /></td>
+		   <td><input autocomplete='off' id='uname' class='filter' name='username' /></td>
+		  <td> <input autocomplete='off' id='qul' class='filter' name='Qualification' /></td>
+		  <td> <input autocomplete='off' id='skills' class='filter' name='Skills'/></td>
+		   <td><input autocomplete='off' id='comp' class='filter' name='Company'/>  </td> 
+		   <td><input autocomplete='off' id='role' class='filter' name='Role'/></td>
+     		</tr>    		
+     		<tr>
+     		    <th column="FirstName"><div>FirstName</div></th>
+		    <th column="LastName"><div>LastName</div></th>
+		    <th column="Mobile"><div>Mobile</div></th>
+		    <th column="Username"><div>Username</div></th>
+		    <th column="Qualification"><div>Qualification</div></th>
+		    <th column="Skills"><div>Skills</div></th>    
+		    <th column="Company"><div>Company</div></th>
+		    <th column="Role"><div>Role</div></th>		    
+     		</tr>
+     	</thead>
+     	<tbody>
+     	</tbody>
+   
+     	</script>
+     	<script id="movie-row" type="text/template"> 		
+     		    			
+     			<td><%= FirstName %></td>
+     			<td><%= LastName %></td>
+     			<td><%= Mobile %></td>
+     			<td><%= Username %></td>
+     			<td><%= Qualification %></td>
+     			<td><%= Skills %></td>
+     			<td><%= Company %></td>
+     			<td><%= Role %></td>
+     	</script>	
+     		
+     		
+     	
+     	
+
+     <div class="wrapper"></div>
+  
+  <script src="../js/jquery-ui.js"></script>
+   <script src="../js/backbone/arr.jq-ui.js"></script> 
+     <script src="../js/backbone/underscore.min.js"></script>
+     <script src="../js/backbone/backbone.min.js"></script>
+     <script src="../js/backbone/backbone.pagination.min.js"></script>
+     <script src="../js/backbone/multifilter.js"></script>
+     <script src="../js/backbone/script.js"></script>
+           
+</div>

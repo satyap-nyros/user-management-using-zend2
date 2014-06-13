@@ -1,0 +1,85 @@
+
+<?php
+
+use Zend\Session\Container;
+$user_session = new Container('user');				
+$title = ucfirst($this->details['first_name']).' '.ucfirst($this->details['last_name']);
+$this->headTitle($title);
+?>
+
+<br>
+
+
+<div class='gray' style='margin-top:15px;'>
+                      <img class="img-polaroid" alt="" src="<?php echo $this->details['profile_pic']; ?>" width="180" height="180">
+                      <span class='strong'><?php echo $this->escapeHtml($title); ?></span>
+</div>
+<!--<table id="example" cellpadding="0" cellspacing="0" border="0" width="100%"  class="table table-striped table-bordered">
+<thead>
+<tr>
+    <th>Field</th>    
+    <th>Value</th> 
+   
+</tr>
+</thead>
+<tbody  role="alert" aria-live="polite" aria-relevant="all">
+<?php foreach ($details as $key => $val) : ?>
+<tr>  
+    <td><?php echo $this->escapeHtml($key);?></td>
+    <td><?php echo $this->escapeHtml($details[$key]);?></td> 
+</tr> 
+<?php endforeach;?>
+</tbody>
+</table>-->
+<div class='about'>
+	
+	<div class='about-edu'>
+		<table cellpadding="0" cellspacing="0" border="0" width="100%"  class="table table-striped " >
+			<thead>
+				<tr>
+    					<th>Personal Info</th>    					  
+				</tr>
+			</thead>
+			<tbody  role="alert" aria-live="polite" aria-relevant="all">			 
+    				<tr><td>First Name </td><td class="edit" sourceid="<?=$this->details['id'];?>" sourcename="first_name"><?php echo $this->details['first_name']; ?> </td></tr>
+    				<tr><td>Last Name </td><td class="edit" sourceid="<?=$this->details['id'];?>" sourcename="last_name"><?php echo $this->details['last_name']; ?></td></tr> 
+    				<tr><td>Mobile </td><td class="edit" sourceid="<?=$this->details['id'];?>" sourcename="mobile"> <?php echo $this->details['mobile']; ?></td></tr>	
+			</tbody>
+		</table>				
+	</div>
+	<div class='about-per'>
+		<table cellpadding="0" cellspacing="0" border="0" width="100%"  class="table table-striped ">
+			<thead>
+				<tr>
+    					<th>Work & Education</th>    					  
+				</tr>
+			</thead>
+			<tbody  role="alert" aria-live="polite" aria-relevant="all">			 
+    			<tr><td>Qualification </td><td class="edit" sourceid="<?=$this->details['id'];?>" sourcename="qulification"><?php echo $this->details['qulification']; ?></td>
+    			</tr>
+    				<tr><td>Company </td><td class="edit" sourceid="<?=$this->details['id'];?>" sourcename="company"><?php echo $this->details['company']; ?></td></tr> 
+    				<tr><td>Skills </td><td class="edit" sourceid="<?=$this->details['id'];?>" sourcename="skills"><?php echo $this->details['skills']; ?></td></tr>	
+			</tbody>
+		</table>
+	</div>
+	<div class='about-sec'>
+		<table cellpadding="0" cellspacing="0" border="0" width="100%"  class="table table-striped ">
+			<thead>
+				<tr>
+    					<th>Login Info</th>    					  
+				</tr>
+			</thead>
+			<tbody  role="alert" aria-live="polite" aria-relevant="all">			 
+    				<tr>
+    					<td>Username </td>
+    					<td class="edit" sourceid="<?=$this->details['id'];?>" sourcename="user_name">
+    						<?php echo $this->details['user_name'];?>
+    					</td>
+    				</tr>
+    				<tr>
+    				<td>Password </td><td class="edit" sourceid="<?=$this->details['id'];?>" sourcename="password"><?php echo $this->details['password'];?></td></tr>     				
+			</tbody>
+		</table>
+	</div>
+</div>
+

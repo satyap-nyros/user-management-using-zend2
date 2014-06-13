@@ -1,0 +1,143 @@
+<?php
+
+namespace Admin\Model;
+
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\Crypt\Password\Bcrypt;
+
+class Signup implements InputFilterAwareInterface
+{
+
+    public $username;
+    public $salt;
+    public $password;
+    public $fname;
+    public $lname;
+    public $address;
+    public $email;
+    public $hash;
+
+    protected $inputFilter;
+
+    public function exchangeArray($data)
+    {
+        $bcrypt = new Bcrypt(array(
+            			'salt' => 'XMG_-2)*|vU@L)vWJceU96,Og[`)9BNW]F.`66fYrls\'uX^=1V',
+            			'cost' => 10,
+                	));
+        for ($i = 0; $i < 50; $i++) {
+        	$data['salt'] .= chr(rand(33, 126));
+        }
+        $data['password'] = md5($data['salt'] . $bcrypt->create($data['password']));
+    	$this->name     = (isset($data['name']))       ? ucfirst($data['name']) : NULL;
+    	$this->username = (isset($data['username']))   ? $data['username']      : NULL;
+    	$this->password = (isset($data['password']))   ? $data['password']      : NULL;
+    	$this->salt     = (isset($data['salt']))       ? $data['salt']          : NULL;
+    	$this->fname     = (isset($data['fname']))       ? $data['fname']          : NULL;
+    	$this->lname     = (isset($data['lname']))       ? $data['lname']          : NULL;
+    	$this->address   = (isset($data['address']))       ? $data['address']          : NULL;
+    	$this->email    = (isset($data['email']))      ? $data['email']         : NULL;
+    	$this->hash     = (isset($data['security']))   ? $data['security']      : NULL;
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+    	throw new \Exception("Not used");
+    }
+
+    public function getInputFilter()
+    {
+    	if (!$this->inputFilter) {
+    		$inputFilter = new InputFilter();
+    		$factory     = new InputFactory();
+    		
+    		$inputFilter->add($factory->createInput(array(
+				'name' => 'username',
+				'required' => TRUE,
+				'filters' => array(
+					array('name' => 'StripTags'),
+					array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+					array(
+						'name'    => 'StringLength',
+						'options' => array(
+							'encoding' => 'UTF-8',
+							'min'      => 3,
+							'max'      => 30,
+						),
+					),
+				),
+    		)));
+    		$inputFilter->add($factory->createInput(array(
+				'name' => 'password',
+				'required' => TRUE,
+				'filters' => array(
+						array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+					array(
+						'name'    => 'StringLength',
+						'options' => array(
+							'encoding' => 'UTF-8',
+							'min'      => 3,
+							'max'      => 50,
+						),
+					),
+				),
+    		)));
+    		$inputFilter->add($factory->createInput(array(
+				'name' => 'repassword',
+				'required' => TRUE,
+				'filters' => array(
+					array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+					array(
+						'name'    => 'StringLength',
+						'options' => array(
+							'encoding' => 'UTF-8',
+							'min'      => 3,
+							'max'      => 50,
+						),
+					),
+					array(
+						'name' => 'identical',
+						'options' => array(
+							'token' => 'password',
+							'messages' => array(\Zend\Validator\Identical::NOT_SAME => 'Please retype the same password.'),
+						),
+					),
+				),
+    		)));
+    		$inputFilter->add($factory->createInput(array(
+				'name' => 'email',
+				'required' => TRUE,
+				'filters' => array(
+					array('name' => 'StringTrim'),
+				),
+				'validators' => array(
+					array(
+						'name'    => 'StringLength',
+						'options' => array(
+							'encoding' => 'UTF-8',
+							'min'      => 3,
+							'max'      => 100,
+						),
+					),
+					array(
+						'name' => 'EmailAddress',
+						'options' => array(
+							'useMxCheck' => FALSE
+						),
+					),
+				),
+    		)));
+   		$this->inputFilter = $inputFilter;
+    	}
+    	return $this->inputFilter;
+    }
+}

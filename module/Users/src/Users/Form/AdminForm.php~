@@ -1,0 +1,113 @@
+<?php
+namespace Admin\Form;
+
+use Zend\Form\Form;
+use Zend\Form\Element;
+
+class AdminForm extends Form
+{
+    public function __construct($name = null)
+    {
+        // we want to ignore the name passed
+        parent::__construct('admin');
+        $this->setAttribute('method', 'post');
+	 $this->setAttribute('class', 'form-horizontal');
+
+
+        $this->add(new Element('security'));
+        $this->add(array(
+            'name' => 'id',
+            'type' => 'Hidden',
+        ));
+
+        $this->add(array(
+            'name' => 'username',
+            'type' => 'Text',
+            'options' => array(
+                'label' => 'Username:',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'password',
+            'type' => 'password',
+            'options' => array(
+                'label' => 'Password:',
+            ),
+        ));  
+
+	$this->add(array(
+            'name' => 'fname',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'First Name:',
+            ),
+        ));
+
+	$this->add(array(
+            'name' => 'lname',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Last Name:',
+            ),
+        ));
+
+	$this->add(array(
+            'name' => 'address',
+            'type' => 'textarea',
+	    'attributes' => array(
+		'style'=>'margin-left:100px',
+            ),
+            'options' => array(
+                'label' => 'Address:',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'email',
+            'type' => 'email',
+            'options' => array(
+                'label' => 'Email:',
+            ),
+        ));	
+
+	$this->add(array(
+            'name' => 'active',
+            'type' => 'Zend\Form\Element\Select',
+                'attributes' =>  array(
+        		'id' => 'active',                
+        		'options' => array(
+            		'1' => 'Active',
+		        '0' => 'Inactive',
+		    ),
+                'style'=>'margin-left:100px;',
+             ),
+            'options' => array(
+                'label' => 'Status',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'submit',
+            'type' => 'Submit',
+            'attributes' => array(
+                'value' => 'Go',
+                'id' => 'submitbutton',
+		'class' => 'btn btn-success'
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'cancel',
+            'type' => 'Submit',
+            'attributes' => array(
+                'value' => 'Cancel',
+                'id' => 'submitbutton',
+		'class' => 'btn btn-primary'
+            ),
+        ));
+
+    }
+}
+
+

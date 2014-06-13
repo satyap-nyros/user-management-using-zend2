@@ -1,0 +1,95 @@
+<?php
+if(!isset($_SESSION['Aid']))
+{
+header('Location:/login');
+exit;}
+else
+{
+header('Location:/admin');
+}
+
+?>
+
+
+<?php
+$title = 'Agents';
+$this->headTitle($title);
+?>
+    <header>
+      <!-- Start: Navigation wrapper -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a href="/" class="brand brand-bootbus"><img src="../img/logo.png" alt="Agent Coach" title="Agent Coach"></a>
+            <!-- Below button used for responsive navigation -->
+            <button type="button" class="btn btn-navbar" data-togentggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- Start: Primary navigation -->
+            <div class="nav-collapse collapse">        
+              <ul class="nav pull-right">
+<!--                <li><a href="<?php echo $this->url('admin', array('action'=>'index')); ?>">Administrators</a></li>  -->
+		<li><a href="<?php echo $this->url('admin', array('action'=>'agent')); ?>">Agents</a></li>
+		<li><a href="<?php echo $this->url('admin', array('action'=>'email')); ?>">Newsletters</a></li>
+                <li><a href="<?php echo $this->url('admin', array('action'=>'logout')); ?>">logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End: Navigation wrapper -->   
+    </header>
+
+
+<br>
+
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+
+
+<p>
+    <a href="<?php echo $this->url('admin', array('action'=>'addagent'));?>">Add new Agent</a>  
+</p>
+
+<table id="agent" class="table table-striped table-bordered" cellpadding="0" cellspacing="0" border="0" width="100%" style="width: 100%;">
+<thead>
+<tr>
+    <th>Name</th>
+    <!--<th>Password</th>-->
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <!--<th>Address</th>-->
+    <th>Actions</th>
+</tr>
+</thead>
+<tbody  role="alert" aria-live="polite" aria-relevant="all">
+<?php foreach ($agents as $Agent) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($Agent->name);?></td>
+    <!--<td><?php echo $this->escapeHtml($Agent->password);?></td>-->
+    <td><?php echo $this->escapeHtml($Agent->fname);?></td>
+    <td><?php echo $this->escapeHtml($Agent->lname);?></td>
+    <td><?php echo $this->escapeHtml($Agent->email);?></td>
+    <!--<td><?php echo $this->escapeHtml($Agent->address);?></td>-->
+    <td>
+        <a href="<?php echo $this->url('admin',
+            array('action'=>'leads', 'id' => $Agent->id));?>">Leads</a>
+
+        <a href="<?php echo $this->url('admin',
+            array('action'=>'editagent', 'id' => $Agent->id));?>">Edit</a>
+
+        <a href="<?php echo $this->url('admin',
+            array('action'=>'remove', 'id' => $Agent->id));?>" onclick="return confirm('Are you sure you want to delete?') ">Delete</a>
+
+        <!--<a href="#leads"  class="btn btn-link" data-toggle="modal" onclick="<? $_SESSION['tempid'] = $Agent->id ?>">Leads</a>-->
+        
+
+    </td>
+</tr> 
+<?php endforeach; ?>
+</tbody>
+</table>
+
+

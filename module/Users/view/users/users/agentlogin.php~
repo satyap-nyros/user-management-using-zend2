@@ -1,0 +1,99 @@
+<?php
+$this->headTitle('Login');
+?>
+<br>
+<div id="content">
+    <div id="content-header">
+        <h3><?php echo $this->escapeHtml('Admin Login'); ?></h3>
+    </div>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <?php if(!empty($this->scc)): ?>
+                <div class="span10">
+                    <ul>
+                    <?php foreach ($this->scc as $v): ?>
+                        <li><?php echo $v; ?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            <?php if(!empty($this->err)): ?>
+                <div class="span10">
+                    <ul>
+                    <?php foreach ($this->err as $v): ?>
+                        <li><?php echo $v; ?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            <div class="span10">
+                <?php
+                $form = $this->form;
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+                <div class="control-group">
+                    <?php echo $this->formElement($form->get('security')); ?>
+                </div>
+
+                <div class="control-group">
+                    <a href="#" >Click Here For Agent Login</a>
+                </div>
+
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('username')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('username')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('username')); ?>
+                </div>
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('password')); ?>
+                    <div class="controls">
+                        <?php echo $this->formPassword($form->get('password')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('password')); ?>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('remember')); ?>
+                    <div class="controls" style="float:left;">
+                        <?php echo $this->formCheckbox($form->get('remember')); ?>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <?php echo $this->formSubmit($form->get('signin')); ?>
+                </div>
+                <?php echo $this->form()->closeTag($form); ?>
+            </div>
+        </div>
+    </div>
+</div>
+ <footer style="margin-top:100px;">
+      <div class="container">
+        <div class="row">
+        	 <div class="span1"><center><img src="img/footer_logo.png"></center></div>
+          <div class="span2">
+            <nav>
+              <ul class="quick-links">
+                <li>All Copy Rights © 2013  agentcoach.com  |   <a href="#">Privacy Policy</a></li>
+              </ul>
+             </nav>
+          </div>
+         
+          
+          <div class="span3">
+          <center>
+               <a href="#"><img src="img/icon1.png" onMouseOut="this.src='img/icon1.png';" onMouseOver="this.src='img/icon_hover.png';"></a>
+                     <a href="#"><img src="img/icon2.png" onMouseOut="this.src='img/icon2.png';" onMouseOver="this.src='img/icon2_hover.png';"></a>
+                      <a href="#"><img src="img/icon3.png" onMouseOut="this.src='img/icon3.png';" onMouseOver="this.src='img/icon3_hover.png';"></a>
+                       <a href="#"><img src="img/icon4.png" onMouseOut="this.src='img/icon4.png';" onMouseOver="this.src='img/icon4_hover.png';"></a>
+               </center>
+            </div>
+          </div>      
+         
+        </div>
+      </div>
+      </div>
+    </footer>  

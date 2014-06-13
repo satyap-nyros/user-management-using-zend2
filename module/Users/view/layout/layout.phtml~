@@ -1,0 +1,107 @@
+<?php echo $this->doctype(); ?>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <?php echo $this->headTitle('AgentCoach'. $this->translate(''))->setSeparator(' - ')->setAutoEscape(false) ?>
+
+        <?php echo $this->headMeta()->appendName('viewport', 'width=device-width, initial-scale=1.0') ?>
+
+        <!-- Le styles -->
+        <?php 
+echo $this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/tablogo.ico'))
+			
+			->prependStylesheet($this->basePath() . '/css/jquery-ui.css')			
+			->prependStylesheet($this->basePath() . '/css/bootstrap-responsive.min.css')
+			->prependStylesheet($this->basePath() . '/css/jquery.dataTables.css')			
+			->prependStylesheet($this->basePath() . '/css/style.css')
+			->prependStylesheet($this->basePath() . '/css/boot-business.css')
+                        ->prependStylesheet($this->basePath() . '/css/bootstrap.min.css')
+                        ->prependStylesheet($this->basePath() . '/css/DT_bootstrap.css')
+                        
+			
+   ?>
+        <!-- Scripts -->
+	
+ <?php  echo $this->headScript()->prependFile($this->basePath() . '/js/html5.js', 'text/javascript', array('conditional' => 'lt IE 9',))
+                                        ->prependFile($this->basePath() . '/js/jquery.js')                                        
+					?>  
+
+
+<script src="../js/jquery.js"></script>
+<script src="../js/jquery-ui-1.8.20.custom.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.dataTables.js"></script>
+
+<script>
+
+$(document).ready( function () {
+		
+    $('#agent').dataTable( {
+       
+    } );	
+    $('#example').dataTable( {
+       
+    } );	
+
+    $('#lead').dataTable( {
+       
+    } );	
+
+    $('#mails').dataTable( {
+       
+    } );	
+
+} );
+</script>
+
+    </head>
+    <header>
+      <!-- Start: Navigation wrapper -->
+      <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container">
+            <a href="/" class="brand brand-bootbus"><img src="../../img/logo.png" alt="Agent Coach" title="Agent Coach"></a>
+            <!-- Below button used for responsive navigation -->
+            <button type="button" class="btn btn-navbar" data-togentggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <!-- Start: Primary navigation -->
+            <div class="nav-collapse collapse">        
+              <ul class="nav pull-right">
+<!--                <li><a href="<?php echo $this->url('admin', array('action'=>'index')); ?>">Administrators</a></li>  -->
+		<li><a href="<?php echo $this->url('admin', array('action'=>'agent')); ?>">Agents</a></li>
+		<li><a href="<?php echo $this->url('admin', array('action'=>'email')); ?>">My E-Newsletters</a></li>
+                <li><a href="<?php echo $this->url('admin', array('action'=>'logout')); ?>">logout</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- End: Navigation wrapper -->   
+    </header>
+    <body>
+    
+        <div class="container" style="margin-bottom:50px;overflow-y:auto;">
+            <?php echo $this->content; ?>
+            <?php echo $this->inlineScript() ?>
+        </div>    
+    
+    </body>
+ <footer class="navbar-fixed-bottom">
+      <div class="container">
+        <div class="row">
+              <div class="span1"></div> <div class="span1"></div>
+        	 <div class="span1"></div>	 
+		    <nav>
+		      <ul class="quick-links">
+		        <li>All Copy Rights © 2013  agentcoach.com  |   <a href="#">Privacy Policy</a></li>
+		      </ul>
+		   </nav>
+              </div>      
+        </div>
+    </footer>  
+   </body>
+</html>

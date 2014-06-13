@@ -1,0 +1,71 @@
+<?php
+namespace Admin\Model;
+
+use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\Sql;
+use Zend\Db\Sql\Select;
+use Zend\Db\Sql\Where;
+
+class MailTable
+{
+    protected $tableGateway;
+
+    public function __construct(TableGateway $tableGateway)
+    {
+        $this->tableGateway = $tableGateway;
+    }
+
+    public function fetchAll()
+    {
+        $resultSet = $this->tableGateway->select();
+        return $resultSet;
+    }    
+
+    public function saveMail(Mails $mail)
+    {
+        $data = array(
+            'content' => $mail->content,
+            'subject' => $mail->subject,
+            'date_sent' => $mail->date_sent,
+            'receipentids' => $mail->receipentids,
+            'optionalcontacts'=> $mail->optionalcontacts,
+            'admin_id' => $mail->admin_id,
+        );
+
+        $this->tableGateway->insert($data);        
+    }
+
+    public function deleteMail($id)
+    {
+        $this->tableGateway->delete(array('id' => $id));        
+    }
+
+    public function GetMail($id)
+    {
+	$where = new Where();    
+	$where->equalTo('id',$id);
+	$resultSet = $this->tableGateway->select($where);
+	
+	foreach($resultSet as $row)	
+	{
+		 $content = $row->content;
+	}
+	return $content;	
+    }
+
+    public function fetchMails($id)
+    {
+	$where = new Where();   
+        $where->equalTo('agent_id',$id);
+        $resultset = $this->tableGateway->select($where);
+	
+//	print_r($resultset);exit;
+
+	return $resultset;	
+
+    }
+
+
+}
+
+

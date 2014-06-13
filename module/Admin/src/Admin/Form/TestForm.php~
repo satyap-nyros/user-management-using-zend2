@@ -1,0 +1,47 @@
+<?php
+namespace Agent\Form;
+
+use Zend\Form\Form;
+use Zend\Form\Element;
+
+class TestForm extends Form
+{
+    public function __construct($name = null)
+    {
+        // we want to ignore the name passed
+        parent::__construct('agent');
+        $this->setAttribute('method', 'post');
+         $this->setAttribute('class', 'form-horizontal');
+
+
+         $captcha = new Captcha('captcha');
+        $captcha->setCaptcha($captchaAdapter);
+        $captcha->setOptions(array('label' => 'Please verify you are human.'));
+        $this->add($captcha);
+
+
+        $this->add(array(
+            'name' => 'submit',
+            'type' => 'Submit',
+
+            'attributes' => array(
+                'value' => 'Go',
+                'id' => 'submitbutton',
+	        'class' => 'btn btn-success',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'cancel',
+            'type' => 'Submit',
+            'attributes' => array(
+                'value' => 'Cancel',
+                'id' => 'submitbutton',
+		'class' => 'btn btn-primary',
+            ),
+        ));
+
+    }
+}
+
+

@@ -1,0 +1,204 @@
+<?php
+namespace Admin\Form;
+
+use Zend\Form\Form;
+use Zend\Form\Element;
+
+class LeadForm extends Form
+{
+    public function __construct($name = null)
+    {
+        // we want to ignore the name passed
+        parent::__construct('admin');
+        $this->setAttribute('method', 'post');
+         $this->setAttribute('class', 'form-horizontal');
+
+        $this->add(new Element('security'));
+        $this->add(array(
+            'name' => 'id',
+            'type' => 'Hidden',
+        ));
+
+	$this->add(array(
+            'name' => 'fname',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'First Name',
+            ),
+        ));
+
+	$this->add(array(
+            'name' => 'lname',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Last Name',
+            ),
+           
+        ));
+
+
+        $this->add(array(
+            'name' => 'email',
+            'type' => 'email',
+            'options' => array(
+                'label' => 'Email',
+            ),
+        ));
+
+	$this->add(array(
+            'name' => 'agentname',
+            'type' => 'text',
+	        'attributes' => array(
+		'readonly' => 'true'
+            ),
+        
+            'options' => array(
+                'label' => 'Agent Name',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'agentmail',
+            'type' => 'email',
+                'attributes' => array(
+		'readonly' => 'true'
+            ),
+        
+            'options' => array(
+                'label' => 'Agent Mail',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'phone',
+            'type' => 'text',
+            'options' => array(
+                'label' => 'Phone',
+               
+            ),
+        ));
+
+	$this->add(array(
+    		'name' => 'address',
+    		'attributes' => array(
+				'type' => 'textarea',
+				'placeholder' => 'Address',
+				'style'=>'margin-left:100px;',
+    		),
+    		'options' => array(
+				'label' => 'Address:',
+    		),
+        ));
+
+
+
+	$this->add(array(
+            'name' => 'status',
+            'type' => 'Zend\Form\Element\Select',
+                'attributes' =>  array(
+        		'id' => 'status',                
+        		'options' => array(
+            		'Submitted' => 'Submitted',
+		     'Rejected' => 'Rejected',
+		     'Accepted' => 'Accepted',
+		     'Mortagage Ready' => 'Mortagage Ready',
+		    ),
+                'style'=>'margin-left:100px;',
+             ),
+            'options' => array(
+                'label' => 'Status',
+            ),
+        ));
+
+
+	$this->add(array(     
+    		'type' => 'Zend\Form\Element\Select',       
+    		'name' => 'state',
+    			'attributes' =>  array(
+        		'id' => 'states',                
+        		'options' => array(
+            		'Alabama' => 'Alabama',
+		     'Alaska' => 'Alaska',
+		     'Arizona' => 'Arizona',
+		     'Arkansas' => 'Arkansas',
+		     'California'=> 'California',
+		     'Colorado' => 'Colorado',
+		     'Connecticut' => 'Connecticut',
+		     'Delaware' => 'Delaware',
+                       'Florida' => 'Florida',
+		     'Georgia' => 'Georgia',
+		     'Hawaii' => 'Hawaii',
+		     'Idaho' => 'Idaho',
+		     'Illinois' => 'Illinois',
+		     'Indiana' => 'Indiana',
+		     'Iowa' => 'Iowa',
+		     'Kansas' => 'Kansas',
+		     'Kentucky' => 'Kentucky',
+ 		     'Louisiana'=> 'Louisiana',
+		     'Maine' => 'Maine',
+		     'Maryland' => 'Maryland',
+		     'Massachusetts' => 'Massachusetts',
+		     'Michigan' => 'Michigan',
+		     'Minnesota'=> 'Minnesota',
+		     'Mississippi' => 'Mississippi',
+		     'Missouri' => 'Missouri',
+		     'Montana' => 'Montana',
+		     'Nebraska'=> 'Nebraska',
+		     'Nevada' => 'Nevada',
+		     'New Hampshire' => 'New Hampshire',
+		     'New Jersey' => 'New Jersey',
+		     'New Mexico' => 'New Mexico',
+		     'New York' => 'New York',
+		     'North Carolina' => 'North Carolina',
+		     'North Dakota' => 'North Dakota',
+		     'Ohio' => 'Ohio',
+		     'Oklahoma' => 'Oklahoma',
+		     'Oregon' => 'Oregon',
+		     'Pennsylvania'=> 'Pennsylvania',
+		     'Rhode Island' => 'Rhode Island',
+		     'South Carolina' => 'South Carolina',
+		     'South Dakota' => 'South Dakota',
+		     'Tennessee' => 'Tennessee',
+		     'Texas'=> 'Texas',
+		     'Utah' => 'Utah',
+		     'Vermont'=> 'Vermont',
+		     'Virginia'=> 'Virginia',
+		     'Washington' => 'Washington',
+		     'West Virginia'=> 'West Virginia',
+		     'Wisconsin' => 'Wisconsin',
+		     'Wyoming' => 'Wyoming',
+     
+        		),
+                     'style'=>'margin-left:100px;',
+    		),
+    		'options' => array(
+        	'label' => 'State',
+		 'attribs' => array ('style' => 'margin-left:30px;'),
+    		),
+	));    
+
+        $this->add(array(
+            'name' => 'submit',
+            'type' => 'Submit',
+
+            'attributes' => array(
+                'value' => 'Go',
+                'id' => 'submitbutton',
+	        'class' => 'btn btn-success',
+            ),
+        ));
+
+        $this->add(array(
+            'name' => 'cancel',
+            'type' => 'Submit',
+            'attributes' => array(
+                'value' => 'Cancel',
+                'id' => 'submitbutton',
+		'class' => 'btn btn-primary',
+            ),
+        ));
+
+    }
+}
+
+

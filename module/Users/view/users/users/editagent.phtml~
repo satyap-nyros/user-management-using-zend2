@@ -1,0 +1,124 @@
+<?php
+if(!isset($_SESSION['Aid']))
+{
+header('Location:/login');
+exit;}
+else
+{
+header('Location:/admin');
+}
+
+?>
+
+
+<?php
+// module/Album/view/album/album/edit.phtml:
+
+$title = 'Edit Agent';
+$this->headTitle($title);
+?>
+   
+<br>
+
+<h1>Agents</h1>
+<h3 style="margin-left:20px;"><?php echo $this->escapeHtml($title); ?></h3>
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url(
+    'admin',
+    array(
+        'action' => 'editagent',
+        'id'     => $this->id,
+    )
+));
+?>
+    <div class="container-fluid" style="height:550px;">
+        <div class="row-fluid">
+            <div class="span10">
+                <?php
+                $form = $this->form;
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+                <div class="control-group">
+			<?php echo $this->formHidden($form->get('id')); ?>
+                </div>
+                
+                <div class="control-group">
+                    <?php  $this->formLabel($form->get('name')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('name')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('name')); ?>
+                </div>
+                <div class="control-group">
+                    <?php  $this->formLabel($form->get('password')); ?>
+                    <div class="controls">
+                        <?php echo $this->formPassword($form->get('password')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('password')); ?>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('fname')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('fname')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('fname')); ?>
+                </div>
+
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('lname')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('lname')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('lname')); ?>
+                </div>
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('address')); ?>
+                    <div class="controls">
+                        <?php echo $this->formTextarea($form->get('address')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('address')); ?>
+                </div>
+
+		<div class="control-group">
+                    <?php echo $this->formLabel($form->get('email')); ?>
+                    <div class="controls">
+                        <?php echo $this->formEmail($form->get('email')); ?>
+                    </div><br><br>
+                    <?php echo $this->formElementErrors($form->get('email')); ?>
+                </div>
+               
+
+		 <div class="control-group">
+                    <?php echo $this->formLabel($form->get('state')); ?>
+                    <div class="controls">
+                        <?php echo $this->formSelect($form->get('state')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('state')); ?>
+                </div>
+
+               <div class="control-group">
+                    <?php echo $this->formLabel($form->get('agentbelogs')); ?>
+                    <div class="controls">
+                        <?php echo $this->formSelect($form->get('agentbelogs')); ?>
+                    </div><br><br>
+                    <?php echo $this->formElementErrors($form->get('agentbelogs')); ?>
+                </div>       
+
+
+                <div class="form-actions">
+                    <?php
+                        echo $this->formSubmit($form->get('cancel')) . ' ';
+                        echo $this->formSubmit($form->get('submit'));
+                    ?>
+                </div>
+                <?php
+                echo $this->form()->closeTag($form);
+                ?>
+            </div>
+        </div>
+    </div>
+
+    </div>

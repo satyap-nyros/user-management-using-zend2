@@ -1,0 +1,41 @@
+
+<div class="container-color">
+<table id='userstab' cellpadding="0" cellspacing="0" border="0" width="100%"  class="table table-striped table-bordered">
+	<thead>
+<tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Mobile</th>
+    <th>username</th>
+    <th>Qualification</th>
+    <th>Skills</th>    
+    <th>Company</th>
+    <th>Role</th>
+    <th>Actions</th>
+</tr>
+</thead>
+<tbody  role="alert" aria-live="polite" aria-relevant="all">
+<?php foreach ($users as $user) : ?>
+<tr>
+    <td><?php echo $this->escapeHtml($user->first_name);?></td>
+    <td><?php echo $this->escapeHtml($user->last_name);?></td>
+    <td><?php echo $this->escapeHtml($user->mobile);?></td>    
+    <td><?php echo $this->escapeHtml($user->user_name);?></td>
+    <td><?php echo $this->escapeHtml($user->qulification);?></td>
+    <td><?php echo $this->escapeHtml($user->skills);?></td>
+    <td><?php echo $this->escapeHtml($user->company);?></td>
+    <td><?php echo $this->escapeHtml($user->role);?></td>   
+    <td>
+    	<a href="<?php echo $this->url('admin',array('action'=>'edituser', 'id' => $user->id));?>">Edit</a>
+
+        <a href="<?php echo $this->url('admin',array('action'=>'remove', 'id' => $user->id));?>" onclick="return confirm('Are you sure you want to delete?') ">Delete</a>
+
+        <!--<a href="#leads"  class="btn btn-link" data-toggle="modal" onclick="<? $_SESSION['tempid'] = $user->id ?>">Leads</a>-->
+        
+
+    </td>
+</tr> 
+<?php endforeach; ?>
+</tbody>
+</table>
+</div>

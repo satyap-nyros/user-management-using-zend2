@@ -1,0 +1,61 @@
+<?php
+namespace Admin\Form;
+
+use Zend\Form\Form;
+use Zend\Form\Element;
+
+class emailForm extends Form
+{
+    public function __construct ($name = NULL)
+    {
+
+        parent::__construct('emailForm');
+
+        $this->setAttribute('method', 'post');
+        $this->setAttribute('class', 'form-horizontal');
+
+
+	$this->add(array(
+    		'name' => 'content',
+    		'attributes' => array(
+				'type' => 'textarea',		
+				'style'=> 'float:left;margin-left:50px;'
+    		),
+    		
+        ));
+
+	$this->add(array(
+    		'name' => 'data',
+		
+    		'attributes' => array(
+				'type' => 'textarea',
+				'style'=> 'float:left;margin-left:50px;'
+    		),
+        ));
+
+        
+        $this->add(array(
+    		'name' => 'submit',
+		
+    		'attributes' => array(
+				'type' => 'submit',
+				'value' => 'Submit',
+				'class' => 'btn btn-success',
+    		),
+    		'options' => array(
+				'label' => 'Save'
+    		),
+        ));
+        $this->add(array(
+    		'name' => 'cancel',
+    		'attributes' => array(
+				'type' => 'cancel',
+				'value' => 'Reset',
+				'class' => 'btn btn-primary',
+    		),
+    		'options' => array(
+				'label' => 'Cancel'
+    		),
+        ));
+    }
+}

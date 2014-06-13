@@ -1,0 +1,74 @@
+
+<div class="jumbotron">
+	<!--<div class="row">  
+	 <div class="login-form">
+          <h2>Login</h2>
+          <form id="login_form" action="<?php echo $this->url('application', array('controller'=>'index','action'=>'authenticate')); ?>">
+            <fieldset>
+              <div class="clearfix">
+                <input type="text" name="user_name" placeholder="Username">
+              </div>
+              <div class="clearfix">
+                <input type="password" name="password" placeholder="Password">
+              </div>
+              <button class="btn-primary" type="submit">Sign in</button>
+            </fieldset>
+          </form>
+         </div>
+	</div>-->
+	
+
+    <h2 style="text-align:center"><?php echo $this->escapeHtml('Log in'); ?></h2>
+    <div class="container-fluid">
+        <div class="row-fluid">
+                <?php if(!empty($this->scc)): ?>
+                <div class="span10">
+                    <ul>
+                    <?php foreach ($this->scc as $v): ?>
+                        <li><?php echo $v; ?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            <?php if(!empty($this->err)): ?>
+                <div class="span10">
+                    <ul>
+                    <?php foreach ($this->err as $v): ?>
+                        <li><?php echo $v; ?></li>
+                    <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+            <div>
+                <?php
+                $form = $this->form;
+                $form->prepare();
+                echo $this->form()->openTag($form);
+                ?>
+                <div class="control-group">
+                    <?php echo $this->formElement($form->get('security')); ?>
+                </div>		
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('user_name')); ?>
+                    <div class="controls">
+                        <?php echo $this->formText($form->get('user_name')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('user_name')); ?>
+                </div>
+                <div class="control-group">
+                    <?php echo $this->formLabel($form->get('password')); ?>
+                    <div class="controls">
+                        <?php echo $this->formPassword($form->get('password')); ?>
+                    </div>
+                    <?php echo $this->formElementErrors($form->get('password'));?>
+                </div>
+
+               
+                <div class="form-actions">
+                    <?php echo $this->formSubmit($form->get('signin')); ?>
+                </div>
+                <?php echo $this->form()->closeTag($form); ?>
+            </div>
+        </div> 
+     </div>
+</div>

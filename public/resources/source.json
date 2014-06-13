@@ -1,0 +1,98 @@
+{
+"meta": {
+    "query": "james",
+    "count": 10
+},
+  "results": [
+    {
+        "title": "Top Hit",
+        "results": {
+            "title": "Company",
+            "year": 2012,
+            "slug": "Company",
+            "image": "url"
+        }
+    },
+    {
+        "title": "Genre",
+        "results": [
+            {
+                "title": "Comedy",
+                "parent": false,  
+                "slug": "comedy",
+                "image": "url"
+            },
+            {
+                "title": "Entertainment > Comedy",  
+                "parent": "Entertainment"
+            },
+            {
+                "title": "Comedy",  // or just title?
+                "title_crumbs": "Entertainment",  // extra param?
+                "parent": "Entertainment"
+            }
+        ]
+    },
+    {
+        "title": "On Demand & Catch Up",
+        "results": [
+            {
+                "title": "Cooking with Nigella",
+                "series": 1,
+                "episode": 10,
+                "slug": "cooking-with-nigella",
+                "channel_slug": "bbc-worldwide"
+            },
+            {
+                "title": "Conan the Destroyer",
+                "series": false,
+                "episode": false,
+                "slug": "conan-the-destroyer",
+                "channel_slug": "bbc-worldwide"
+            }
+        ]
+    },
+    {
+        "title": "On Now",
+        "results": [
+            {
+                "title": "Sooty and Co",
+                "series": "Sr. 2 Ep. 1",
+                "start_time": "19:30",  // string or timestamp?
+                "channel": "BBC Two",
+                "is_new": false,
+                "channel_slug": "bbc-world-wide"
+            },
+            {
+                "title": "Coronation Street",
+                "series": false,
+                "start_time": "19:00",
+                "channel": "ITV",
+                "is_new": true,
+                "channel_slug": "bbc-world-wide"
+            }
+        ]
+    },
+    {
+        "title": "Upcoming",
+        "results": [
+            {
+                "title": "Sooty and Co",
+                "series": "Sr. 2 Ep. 1",
+                "start_time": "2013/07/10 10:00",
+                "channel": "BBC Two",
+                "is_new": false,
+                "channel_slug": "bbc-world-wide"
+            },
+            {
+                "title": "Strictly Come Dancing",
+                "series": "Sr. 2 Ep. 2",
+                "start_time": "Today 07:00",
+                "channel": "BBC Two",
+                "is_new": true,
+                "channel_slug": "bbc-world-wide"
+            }
+        ]
+    }
+  ]
+}
